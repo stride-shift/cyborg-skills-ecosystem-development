@@ -13,9 +13,10 @@ import subprocess
 import tempfile
 from pathlib import Path
 
-# Configuration
-TRANSCRIPTS_DIR = Path("/home/user/cyborg-skills-ecosystem-development/transcripts")
-OUTPUT_FILE = Path("/home/user/cyborg-skills-ecosystem-development/cyborg_ecosystem_extraction.md")
+# Configuration - paths are relative to script location for portability
+SCRIPT_DIR = Path(__file__).parent.resolve()
+TRANSCRIPTS_DIR = SCRIPT_DIR / "transcripts"
+OUTPUT_FILE = SCRIPT_DIR / "cyborg_ecosystem_extraction.md"
 
 # Use the trial API key from environment
 API_KEY = os.environ.get("GEMINI_API_TRIAL") or os.environ.get("GEMINI_API_KEY")
@@ -228,13 +229,18 @@ Now please analyze all the transcripts above and provide a comprehensive extract
         print("ERROR: All models failed.")
         print("="*60)
         print("\nPossible causes:")
-        print("1. The GEMINI_API_TRIAL key may be invalid or expired")
-        print("2. The API key may not have permission for these models")
-        print("3. API quota may be exhausted")
+        print("1. Network restriction: Google's Generative AI API may be blocked")
+        print("   from your current network/IP (common in cloud environments)")
+        print("2. The API key may be invalid or expired")
+        print("3. The API key may not have permission for these models")
+        print("4. API quota may be exhausted")
         print("\nTo fix:")
-        print("1. Get a valid API key from https://aistudio.google.com/")
-        print("2. Set it: export GEMINI_API_KEY='your-key-here'")
-        print("3. Run this script again")
+        print("1. Try running from a different network (local machine, etc.)")
+        print("2. Get a valid API key from https://aistudio.google.com/")
+        print("3. Set it: export GEMINI_API_KEY='your-key-here'")
+        print("4. Run this script again")
+        print("\nAlternatively, copy the PDFs and this script to a local machine")
+        print("with unrestricted network access to googleapis.com")
         return
 
     print(f"\nSuccess with model: {used_model}")
