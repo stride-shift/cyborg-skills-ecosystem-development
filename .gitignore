@@ -1,0 +1,19 @@
+# Transcripts - PDFs confuse agents
+transcripts/
+
+# Environment
+.env
+.venv
+venv/
+
+# Python
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+
+# Temp audio files
+*.wav
+!audio/*.wav
+!audio/**/*.wav
